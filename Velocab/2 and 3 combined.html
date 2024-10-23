@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Ride</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css">
+    <link rel="stylesheet" href="bootstrap.css">
+    <style>
+        body {
+            background: url("https://fleetautonews.com.au/wp-content/uploads/2022/05/Step-1-to-ev-your-fleet-1024x576.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .form-control {
+            border: none;
+            border-bottom: 2px solid black;
+        }
+        .yup {
+            border-radius: 9px;
+        }
+        .btn-custom {
+            border-radius: 10px;
+            width: 55%;
+            height: 50px;
+            font-size: large;
+        }
+        
+        .btn-see-prices {
+            border-radius: 10px;
+            width: 80%; 
+            height: 50px;
+            font-size: large; 
+            background-color: rgb(64, 155, 234);
+            border: none;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        div img, button{
+            cursor: pointer;
+            transition: all 0.9s ease;
+        }
+        div img:hover ,button:hover{
+            transform: scale(1.1);
+        }
+        .awesomplete {
+            width: 100%;
+        }
+        #distanceOutput {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .heading-left {
+            text-align: left;
+        }
+
+        .rounded-pill {
+            background-color: rgba(255, 255, 255, 0.71);
+        }
+        img {
+            border-radius: 50%;
+            width: 170px;
+            height: 100px;
+            object-fit: cover;
+        }
+        .row {
+            align-items: center;
+        }
+        .spinner-border {
+            display: none;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1 class="mt-4 text-black heading-left" style="font-weight:600;">Request a Ride <br>for Now or Later:</h1>
+        <div class="row justify-content-center mt-5">
+            <div class="yup col-md-4 p-5 text-center" style="background-color: rgba(255, 255, 255, 0.75);">
+                <form id="rideForm">
+                    <!-- Pickup Location -->
+                    <div class="d-flex flex-row mb-4">
+                        <input type="text" id="pickup" class="form-control rounded-1" placeholder="Enter Pickup Location" required>
+                    </div>
+                    <!-- Drop-off Location -->
+                    <div class="d-flex flex-row mb-4">
+                        <input type="text" id="dropoff" class="form-control rounded-1" placeholder="Enter Drop-off Location" required>
+                    </div>
+                    <!-- Buttons -->
+                    <div class="d-flex flex-column align-items-center">
+                        <button type="button" class="btn btn-primary btn-see-prices" onclick="showPrices()">See Prices
+                            <!-- Spinner for loading indicator -->
+                            <div class="spinner-border text-light" role="status" id="price-spinner">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </button>
+                    </div>
+                </form>
+                <!-- Distance Output -->
+                <div id="distanceOutput" class="text-dark"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid mt-5 w-75">
+        <!-- Go Intercity -->
+        <div class="row m-4 rounded-pill p-3">
+            <div class="col-3 d-flex justify-content-center align-items-center">
+                <img class="img-thumbnail" src="go_interecity.png" alt="Go Intercity" height="200px">
+            </div>
+            <div class="col-9 ps-4">
+                <div class="d-flex">
+                    <div class="col-4">
+                        <h5 class="fw-bold">Go Intercity</h5>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-dark">
+                            <a href="payment_form 4th slide.HTML" style="text-decoration: none; color: white;" target="_blank">1-4 seats</a>
+                        </button>
+                    </div>
+                </div>
+                <p>Affordable Outstation rides in compact Cars</p>
+               <p class="ps-2 fw-bold">Price: Rs. <span id="price-go">-</span></p>
+            </div>
+        </div>
+
+        <!-- XL Intercity -->
+        <div class="row m-4 rounded-pill p-3">
+            <div class="col-3 d-flex justify-content-center align-items-center">
+                <img class="img-thumbnail" src="xl_intercity.png" alt="XL Intercity">
+            </div>
+            <div class="col-9 ps-4">
+                <div class="d-flex">
+                    <div class="col-4">
+                        <h5 class="fw-bold">XL Intercity</h5>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-dark">
+                           <a href="payment_form 4th slide.HTML" style="text-decoration: none; color: white;" target="_blank"> 1-6 seats</a>
+                        </button>
+                    </div>
+                </div>
+                <p>Outstation rides in spacious SUV's</p>
+                <p class="ps-2 fw-bold">Price: Rs. <span id="price-xl">-</span></p>
+            </div>
+        </div>
+
+        <!-- Luxury Intercity -->
+        <div class="row m-4 rounded-pill p-3">
+            <div class="col-3 d-flex justify-content-center align-items-center">
+                <img class="img-thumbnail" src="luxury.png" alt="Luxury Intercity">
+            </div>
+            <div class="col-9 ps-4">
+                <div class="d-flex">
+                    <div class="col-4">
+                        <h5 class="fw-bold">Luxury Intercity</h5>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-dark">
+                            <a href="payment_form 4th slide.HTML" style="text-decoration: none; color: white;" target="_blank">1-4 seats</a>
+                        </button>
+                    </div>
+                </div>
+                <p>Outstation rides in Luxury Cars</p>
+               <p class="ps-2 fw-bold">Price: Rs. <span id="price-luxury">-</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Awesomplete JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
+    <!-- jQuery and Bootstrap JS (for Bootstrap functionality if needed) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize Awesomplete instances
+        const pickupInput = document.getElementById("pickup");
+        const dropoffInput = document.getElementById("dropoff");
+
+        const pickupAwesomplete = new Awesomplete(pickupInput, {
+            minChars: 3,
+            maxItems: 5
+        });
+
+        const dropoffAwesomplete = new Awesomplete(dropoffInput, {
+            minChars: 3,
+            maxItems: 5
+        });
+
+        // Cache for storing previous location queries
+        const locationCache = {};
+
+        // Debouncing variables
+        let debounceTimer;
+
+        // Function to debounce API calls
+        function debounce(func, delay) {
+            return function(...args) {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        // Fetch suggestions with caching and debouncing
+        const fetchSuggestions = debounce((query, callback) => {
+            if (locationCache[query]) {
+                // Return cached suggestions if available
+                callback(locationCache[query]);
+            } else {
+                const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&countrycodes=IN&addressdetails=1&limit=5`;
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.length > 0) {
+                            const suggestions = data.map(item => item.display_name);
+                            // Cache the suggestions
+                            locationCache[query] = suggestions;
+                            callback(suggestions);
+                        } else {
+                            callback([]);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching suggestions:', error);
+                        callback([]);
+                    });
+            }
+        }, 300); // 300ms debounce
+
+        // Event listener for Pickup input
+        pickupInput.addEventListener("input", function() {
+            const query = pickupInput.value;
+            if (query.length > 2) {
+                fetchSuggestions(query, suggestions => {
+                    pickupAwesomplete.list = suggestions;
+                });
+            }
+        });
+
+        // Event listener for Drop-off input
+        dropoffInput.addEventListener("input", function() {
+            const query = dropoffInput.value;
+            if (query.length > 2) {
+                fetchSuggestions(query, suggestions => {
+                    dropoffAwesomplete.list = suggestions;
+                });
+            }
+        });
+
+        // Function to geocode an address
+        function geocodeAddress(address, callback) {
+            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&countrycodes=IN`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        const location = data[0];
+                        callback({ lat: parseFloat(location.lat), lon: parseFloat(location.lon) });
+                    } else {
+                        callback(null);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error geocoding address:', error);
+                    callback(null);
+                });
+        }
+
+        // Haversine formula to calculate distance
+        function haversineDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radius of Earth in km
+            const dLat = toRad(lat2 - lat1);
+            const dLon = toRad(lon2 - lon1);
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+                      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        function toRad(deg) {
+            return deg * (Math.PI / 180);
+        }
+
+        // Function to reset price fields
+        function resetPrices() {
+            document.getElementById("price-go").innerText = "-";
+            document.getElementById("price-xl").innerText = "-";
+            document.getElementById("price-luxury").innerText = "-";
+        }
+
+        // Function to show prices with spinner
+        function showPrices() {
+            const priceSpinner = document.getElementById("price-spinner");
+            priceSpinner.style.display = 'inline-block'; // Show spinner
+
+            // Delay to simulate loading (e.g., fetching data)
+            setTimeout(() => {
+                calculateDistance(); // Calculate distance and update prices
+                priceSpinner.style.display = 'none'; // Hide spinner
+            }, 2000); // 2 seconds delay
+        }
+
+        // Function to geocode and calculate distance
+        function calculateDistance() {
+            const pickup = pickupInput.value.trim();
+            const dropoff = dropoffInput.value.trim();
+
+            if (pickup && dropoff) {
+                // Geocode both locations
+                geocodeAddress(pickup, pickupCoords => {
+                    geocodeAddress(dropoff, dropoffCoords => {
+                        if (pickupCoords && dropoffCoords) {
+                            const distance = haversineDistance(pickupCoords.lat, pickupCoords.lon, dropoffCoords.lat, dropoffCoords.lon);
+                            document.getElementById("distanceOutput").innerHTML = `Distance: ${distance.toFixed(2)} km`;
+
+                            // Calculate prices based on distance
+                            const priceGo = distance * 9;
+                            const priceXL = distance * 13;
+                            const priceLuxury = distance * 18;
+
+                            // Update the price spans
+                            document.getElementById("price-go").innerText = priceGo.toFixed(2);
+                            document.getElementById("price-xl").innerText = priceXL.toFixed(2);
+                            document.getElementById("price-luxury").innerText = priceLuxury.toFixed(2);
+                        } else {
+                            document.getElementById("distanceOutput").innerHTML = "Unable to geocode one or both addresses. Please try more specific locations.";
+                            // Reset prices
+                            resetPrices();
+                        }
+                    });
+                });
+            } else {
+                // If either pickup or dropoff is empty
+                document.getElementById("distanceOutput").innerHTML = "Please enter both pickup and drop-off locations.";
+                resetPrices();
+            }
+        }
+    </script>
+</body>
+</html>
