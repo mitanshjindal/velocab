@@ -1,0 +1,109 @@
+<HTML>
+    <HEAD>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <TITLE>PAYMENT FORM</TITLE>
+        <style>
+            *{ 
+                box-sizing: border-box;
+            }
+            body{
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                margin: 15px 30px;
+                padding: 10px; 
+            }
+            .CONTAINER{
+                background-color:#CCC;
+                border-radius: 8px;
+                padding: 10PX;
+                border: 1px solid #CCC;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            input[type="text"],
+            input[type="email"],
+            input[type="number"],
+            input[type="date"],
+            input[type="password"],
+            textarea,
+            select
+            {
+                width: 100%;
+                padding: 5px;
+                margin: 10px;
+                border: 50px red;
+                border-radius: 5px;
+            }
+            fieldset{
+                background-color: white
+                border 50px solid red;
+            }
+            .main_heading{
+                text-align: center;
+            }
+            INPUT[TYPE="submit"]{
+                width: 100%;
+                background-color: rgb(24, 150, 162);
+                padding: 10PX 20PX;
+                margin: 5PX;
+                color: white;
+                border: none;
+                border-radius: 5PX;
+                cursor: pointer;
+            }
+            input[type="submit"]:hover{
+                background-color: rgb(10, 79, 86);
+            }
+            hr {
+            border: 1px solid #ccc;
+            margin: 20px 0;
+            }
+        @media (max-width: 600px) {
+            body {
+                margin: 10px;
+                padding: 5px;
+            }
+
+            .CONTAINER {
+                padding: 15px;
+            }
+
+            input[type="submit"] {
+                font-size: 16px;
+                padding: 12px;
+            }
+        }
+        </style>
+        
+    </HEAD>
+    <BODY>
+        <div class="CONTAINER">
+        <FORM>
+      <H1 class="main_heading">PAYMENT FORM</H1>
+      <hr>
+      <H2>USER INFORMATION</H2>
+      <P>NAME: *<INPUT TYPE="text" NAME="name" required placeholder="eg. xyz"></P>
+       <fieldset>
+        <legend>GENDER*</legend>
+        <P>MALE <INPUT TYPE="radio" NAME="GENDER" ID="MALE" required>FEMALE  <INPUT TYPE="radio" NAME="GENDER" ID="FEMALE" required></P>
+       </fieldset>
+       <P>ADDRESS: <textarea placeholder="enter your address" NAME="ADDRESS" ID="ADDRESS" ROWS="5" COLS="100" ></TEXTarea></P>
+        <P>EMAIL: *<INPUT TYPE="email" NAME="EMAIL" ID="EMAIL" required placeholder="eg. abc@gmail.com"></P>
+            PINCODE: *<INPUT type="number" name="PINCODE" id="PINCODE" required placeholder="eg. 123456">
+                <H2>PAYMENT INFORMATION</H2>
+                <P>CARD TYPE:*
+                    <SELECT NAME="CARD TYPE" ID="CARD_TYPE" required>
+                    <OPTION value="">--SELECT A CARD TYPE--</OPTION>
+                    <OPTION VALUE="RUPAY">RUPAY</OPTION>
+                    <OPTION VALUE="MASTER CARD">MASTER CARD</OPTION>
+                    <OPTION VALUE="VISA">VISA</OPTION>
+                </SELECT>
+                </P>
+                <P>CARD NUMBER:* <INPUT TYPE="number" NAME="CARD_NUMBER" ID="CARD_NUMBER" required placeholder="eg. 1111 2222 3333"></P>
+               <P>EXPIRATION DATE: <INPUT TYPE="date" NAME="EXP_DATE" ID="EXP_DATE"></P>
+                <P>CVV:* <INPUT TYPE="password" NAME="CVV" ID="CVV" placeholder="eg. 123"></P>
+                    <INPUT TYPE="submit" VALUE="PAY NOW">
+                    </FORM>
+                </div>
+    </BODY>
+</HTML>
